@@ -265,7 +265,10 @@
       }
 
       .eyebrow {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.42rem;
         margin-bottom: 0.85rem;
         padding: 0.38rem 0.9rem;
         font-size: 0.7rem;
@@ -277,6 +280,30 @@
         border: 1px solid rgba(167, 139, 250, 0.45);
         border-radius: 999px;
         box-shadow: 0 0 20px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      a.eyebrow {
+        text-decoration: none;
+        transition: color 0.2s ease, border-color 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+      }
+
+      a.eyebrow:hover {
+        color: #f8fafc;
+        border-color: rgba(125, 211, 252, 0.6);
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+      }
+
+      a.eyebrow:focus-visible {
+        outline: 2px solid rgba(167, 139, 250, 0.9);
+        outline-offset: 4px;
+      }
+
+      .eyebrow svg {
+        width: 0.92rem;
+        height: 0.92rem;
+        flex-shrink: 0;
+        letter-spacing: 0;
       }
 
       header h1 {
@@ -413,6 +440,78 @@
         border-radius: 3px;
       }
 
+      .catalog-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin: 0 auto 1.35rem;
+        animation: intro-silk-sub 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.42s backwards;
+      }
+
+      .catalog-control {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.32rem;
+        border-radius: 14px;
+        border: 1px solid rgba(167, 139, 250, 0.2);
+        background: rgba(255, 255, 255, 0.045);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      .catalog-control-label {
+        align-self: stretch;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 0.7rem;
+        border-radius: 10px;
+        color: #dbeafe;
+        background: rgba(15, 23, 42, 0.58);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: default;
+        user-select: none;
+      }
+
+      .catalog-control-button {
+        appearance: none;
+        border: 0;
+        border-radius: 10px;
+        padding: 0.46rem 0.68rem;
+        color: #c7d7f0;
+        background: transparent;
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1;
+        cursor: pointer;
+        transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .catalog-control-button:hover {
+        color: #f8fafc;
+        background: rgba(255, 255, 255, 0.075);
+      }
+
+      .catalog-control-button[aria-pressed="true"] {
+        color: #ffffff;
+        background: linear-gradient(155deg, rgba(139, 92, 246, 0.8), rgba(59, 130, 246, 0.72));
+        box-shadow: 0 6px 18px rgba(59, 130, 246, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      }
+
+      .catalog-control-button:focus-visible {
+        outline: 2px solid rgba(167, 139, 250, 0.9);
+        outline-offset: 2px;
+      }
+
+      .catalog {
+        display: block;
+      }
+
       .grid {
         display: grid;
         gap: 1rem;
@@ -430,6 +529,19 @@
           grid-template-columns: repeat(3, 1fr);
           gap: 1.35rem;
         }
+      }
+
+      .course-group + .course-group {
+        margin-top: 1.65rem;
+      }
+
+      .course-group-title {
+        margin: 0 0 0.75rem;
+        color: #dbeafe;
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .course-card {
@@ -568,6 +680,14 @@
       .course-icon svg {
         width: 1.2rem;
         height: 1.2rem;
+      }
+
+      .course-icon img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        border-radius: 11px;
       }
 
       .course-title {
@@ -782,6 +902,7 @@
         }
         #site-eyebrow,
         #site-subtitle,
+        .catalog-controls,
         .site-footer,
         #config-error:not([hidden]) {
           animation: none !important;
@@ -828,7 +949,19 @@
     </div>
     <div class="wrap">
       <header>
-        <span class="eyebrow" id="site-eyebrow">Self-enrollment</span>
+        <a
+          class="eyebrow"
+          id="site-eyebrow"
+          href="https://sites.google.com/asdrp.org/student-training/mini-courses"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Learn more about Mini-Courses
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
         <h1 id="site-title">Canvas course enrollment</h1>
         <p id="site-subtitle" class="site-subtitle">
           <span id="subtitle-a11y" class="sr-only" aria-live="polite" aria-atomic="true"></span>
@@ -836,7 +969,14 @@
           <span id="subtitle-typed" class="subtitle-typed subtitle-typed--cursor" aria-hidden="true"></span>
         </p>
       </header>
-      <main id="course-grid" class="grid" aria-live="polite"></main>
+      <section class="catalog-controls" id="catalog-controls" aria-label="Course display controls">
+        <div class="catalog-control" role="group" aria-label="Group courses">
+          <span class="catalog-control-label" aria-hidden="true">Group By</span>
+          <button class="catalog-control-button" type="button" data-group="session" aria-pressed="true">Session</button>
+          <button class="catalog-control-button" type="button" data-group="format" aria-pressed="false">In-Person/Online</button>
+        </div>
+      </section>
+      <main id="course-grid" class="catalog" aria-live="polite"></main>
       <div id="config-error" class="alert" hidden></div>
       <footer class="site-footer" id="site-footer"></footer>
     </div>
@@ -847,6 +987,9 @@
 
         var subtitleAnimTimer = null;
         var subtitleAnimToken = 0;
+        var catalogState = {
+          group: "session",
+        };
 
         function clearSubtitleAnimation() {
           if (subtitleAnimTimer) {
@@ -938,29 +1081,185 @@
           }
         }
 
-        function courseBylineMarkup(course) {
+        function normalizeCourseAdvisors(course) {
           if (!course) {
-            return "";
+            return [];
           }
+
+          var raw = Array.isArray(course.advisors) ? course.advisors : [];
+          var advisors = [];
+          for (var i = 0; i < raw.length; i++) {
+            var item = raw[i];
+            var name = "";
+            var url = "";
+            if (typeof item === "string") {
+              name = item.trim();
+            } else if (item && typeof item === "object") {
+              name = item.name != null ? String(item.name).trim() : "";
+              url = item.url != null ? String(item.url).trim() : "";
+            }
+            if (name) {
+              advisors.push({ name: name, url: url });
+            }
+          }
+
+          if (advisors.length > 0) {
+            return advisors;
+          }
+
           var name = course.advisorName != null ? String(course.advisorName).trim() : "";
           if (!name) {
-            return "";
+            return [];
           }
           var urlRaw = course.advisorUrl != null ? String(course.advisorUrl).trim() : "";
-          var href = urlRaw ? safeExternalUrl(urlRaw) : "";
-          var label = '<span class="course-by-label">By </span>';
+          return [{ name: name, url: urlRaw }];
+        }
+
+        function advisorNameMarkup(advisor) {
+          var href = advisor.url ? safeExternalUrl(advisor.url) : "";
           if (href) {
             return (
-              '<p class="course-by">' +
-              label +
               '<a class="course-by-name" href="' +
               escapeAttr(href) +
               '" target="_blank" rel="noopener noreferrer">' +
-              escapeHtml(name) +
-              "</a></p>"
+              escapeHtml(advisor.name) +
+              "</a>"
             );
           }
-          return '<p class="course-by">' + label + '<span class="course-by-name">' + escapeHtml(name) + "</span></p>";
+          return '<span class="course-by-name">' + escapeHtml(advisor.name) + "</span>";
+        }
+
+        function courseBylineMarkup(course) {
+          var advisors = normalizeCourseAdvisors(course);
+          if (advisors.length === 0) {
+            return "";
+          }
+          var label = '<span class="course-by-label">By </span>';
+          var html = "";
+          for (var i = 0; i < advisors.length; i++) {
+            if (i > 0) {
+              html += '<span class="course-by-label"> &amp; </span>';
+            }
+            html += advisorNameMarkup(advisors[i]);
+          }
+          return '<p class="course-by">' + label + html + "</p>";
+        }
+
+        function courseIllustrationTheme(title) {
+          var t = String(title || "").toLowerCase();
+          if (/organic|reaction|chem|drug/.test(t)) {
+            return { from: "#22d3ee", to: "#8b5cf6", accent: "#f0abfc", motif: "chem" };
+          }
+          if (/bio|membrane|biological/.test(t)) {
+            return { from: "#2dd4bf", to: "#2563eb", accent: "#bbf7d0", motif: "bio" };
+          }
+          if (/database|data engineering|representation/.test(t)) {
+            return { from: "#38bdf8", to: "#0f766e", accent: "#fde68a", motif: "data" };
+          }
+          if (/machine learning|computer vision|using ai|ai research/.test(t)) {
+            return { from: "#818cf8", to: "#db2777", accent: "#bfdbfe", motif: "ai" };
+          }
+          if (/material/.test(t)) {
+            return { from: "#f59e0b", to: "#0ea5e9", accent: "#fed7aa", motif: "material" };
+          }
+          if (/quantum|absolutely small/.test(t)) {
+            return { from: "#a78bfa", to: "#0891b2", accent: "#fef3c7", motif: "quantum" };
+          }
+          if (/mathematical|modeling|simulation/.test(t)) {
+            return { from: "#14b8a6", to: "#6366f1", accent: "#ccfbf1", motif: "math" };
+          }
+          if (/renewable|power/.test(t)) {
+            return { from: "#84cc16", to: "#0284c7", accent: "#fef08a", motif: "energy" };
+          }
+          return { from: "#60a5fa", to: "#8b5cf6", accent: "#e0f2fe", motif: "course" };
+        }
+
+        function courseIllustrationSvg(theme) {
+          var common =
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">' +
+            '<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="' +
+            theme.from +
+            '"/><stop offset="1" stop-color="' +
+            theme.to +
+            '"/></linearGradient></defs>' +
+            '<rect width="96" height="96" rx="22" fill="url(#g)"/>' +
+            '<circle cx="78" cy="18" r="22" fill="white" opacity=".14"/>' +
+            '<circle cx="14" cy="82" r="28" fill="black" opacity=".12"/>';
+
+          if (theme.motif === "chem") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M33 34l15-9 15 9v18l-15 9-15-9z"/><path d="M63 43h12M21 43h12M48 25V13M48 61v13"/></g></svg>'
+            );
+          }
+          if (theme.motif === "bio") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round"><path d="M26 31c14-10 30 30 44 20"/><path d="M26 47c14-10 30 30 44 20"/><path d="M34 29l-5 18M45 38l-5 18M56 47l-5 18M67 50l-5 18"/></g></svg>'
+            );
+          }
+          if (theme.motif === "data") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M25 29h46v12H25zM25 43h46v12H25zM25 57h46v12H25z"/><path d="M34 35h1M34 49h1M34 63h1"/></g></svg>'
+            );
+          }
+          if (theme.motif === "ai") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="30" y="30" width="36" height="36" rx="8"/><path d="M48 22v8M48 66v8M22 48h8M66 48h8M37 43h1M58 43h1M40 56c5 4 11 4 16 0"/></g></svg>'
+            );
+          }
+          if (theme.motif === "material") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M48 19l26 15v30L48 79 22 64V34z"/><path d="M22 34l26 15 26-15M48 49v30"/></g></svg>'
+            );
+          }
+          if (theme.motif === "quantum") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="4" stroke-linecap="round"><circle cx="48" cy="48" r="6" fill="' +
+              theme.accent +
+              '"/><ellipse cx="48" cy="48" rx="30" ry="12"/><ellipse cx="48" cy="48" rx="30" ry="12" transform="rotate(60 48 48)"/><ellipse cx="48" cy="48" rx="30" ry="12" transform="rotate(120 48 48)"/></g></svg>'
+            );
+          }
+          if (theme.motif === "math") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 64c12-33 22-33 34 0M38 49h34M62 30l10 10-10 10"/></g></svg>'
+            );
+          }
+          if (theme.motif === "energy") {
+            return (
+              common +
+              '<g fill="none" stroke="' +
+              theme.accent +
+              '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M48 16v28M48 44L25 31M48 44l23-13M48 44v36M35 80h26"/></g></svg>'
+            );
+          }
+          return common + '<path d="M28 30h40v36H28zM36 40h24M36 50h18" fill="none" stroke="' + theme.accent + '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        }
+
+        function courseImageMarkup(course) {
+          var title = course && course.title ? String(course.title) : "Mini-course";
+          var svg = courseIllustrationSvg(courseIllustrationTheme(title));
+          var src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+          return '<img src="' + escapeAttr(src) + '" alt="" loading="lazy" decoding="async" />';
         }
 
         function ensureSubtitleDom() {
@@ -1085,6 +1384,140 @@
           return base + enc;
         }
 
+        function courseFormatLabel(course) {
+          var raw = course && course.format != null ? String(course.format).trim() : "";
+          return raw || "Other";
+        }
+
+        function courseSessionLabel(course) {
+          var raw = course && course.session != null ? String(course.session).trim() : "";
+          return raw || "Other";
+        }
+
+        function updateCatalogControls() {
+          var controls = document.getElementById("catalog-controls");
+          if (!controls) {
+            return;
+          }
+          var buttons = controls.querySelectorAll("[data-group]");
+          for (var i = 0; i < buttons.length; i++) {
+            var btn = buttons[i];
+            var group = btn.getAttribute("data-group");
+            var pressed = group === catalogState.group;
+            btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+          }
+        }
+
+        function setupCatalogControls() {
+          var controls = document.getElementById("catalog-controls");
+          if (!controls || controls.getAttribute("data-ready") === "true") {
+            updateCatalogControls();
+            return;
+          }
+          controls.setAttribute("data-ready", "true");
+          controls.addEventListener("click", function (event) {
+            var target = event.target;
+            while (target && target !== controls && !target.getAttribute("data-group")) {
+              target = target.parentNode;
+            }
+            if (!target || target === controls) {
+              return;
+            }
+            var nextGroup = target.getAttribute("data-group");
+            if (nextGroup) {
+              catalogState.group = nextGroup;
+            }
+            render();
+          });
+          updateCatalogControls();
+        }
+
+        function courseCardMarkup(course, index, base, arrow) {
+          var href = buildEnrollUrl(base, course.code);
+          var label = "Join " + course.title + " in Canvas";
+          var bylineHtml = courseBylineMarkup(course);
+          var imageHtml = courseImageMarkup(course);
+          return (
+            '<article class="course-card" style="--i:' +
+            index +
+            '">' +
+            '<div class="course-card-inner">' +
+            '<div class="course-card-head">' +
+            '<div class="course-icon" aria-hidden="true">' +
+            imageHtml +
+            "</div>" +
+            '<div class="course-card-title-block">' +
+            '<h2 class="course-title">' +
+            escapeHtml(course.title) +
+            "</h2>" +
+            bylineHtml +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            '<div class="course-card-foot">' +
+            '<a class="btn-join" href="' +
+            escapeAttr(href) +
+            '" target="_blank" rel="noopener noreferrer" aria-label="' +
+            escapeAttr(label) +
+            '">Join in Canvas ' +
+            arrow +
+            "</a>" +
+            "</div>" +
+            "</article>"
+          );
+        }
+
+        function courseGridMarkup(courses, base, arrow, startIndex) {
+          var html = '<div class="grid">';
+          for (var i = 0; i < courses.length; i++) {
+            html += courseCardMarkup(courses[i], startIndex + i, base, arrow);
+          }
+          return html + "</div>";
+        }
+
+        function coursesMarkup(courses, base, arrow) {
+          var getGroupLabel = catalogState.group === "format" ? courseFormatLabel : courseSessionLabel;
+          var groups = [];
+          var groupMap = {};
+          for (var i = 0; i < courses.length; i++) {
+            var label = getGroupLabel(courses[i]);
+            if (!groupMap[label]) {
+              groupMap[label] = [];
+              groups.push(label);
+            }
+            groupMap[label].push(courses[i]);
+          }
+
+          groups.sort(function (a, b) {
+            if (a === "Session 1") return -1;
+            if (b === "Session 1") return 1;
+            if (a === "Session 2") return -1;
+            if (b === "Session 2") return 1;
+            if (a === "In-Person") return -1;
+            if (b === "In-Person") return 1;
+            if (a === "Online") return -1;
+            if (b === "Online") return 1;
+            return a.localeCompare(b, undefined, { sensitivity: "base" });
+          });
+
+          var html = "";
+          var count = 0;
+          for (var g = 0; g < groups.length; g++) {
+            var groupName = groups[g];
+            var groupCourses = groupMap[groupName];
+            html +=
+              '<section class="course-group" aria-label="' +
+              escapeAttr(groupName) +
+              ' courses"><h2 class="course-group-title">' +
+              escapeHtml(groupName) +
+              "</h2>" +
+              courseGridMarkup(groupCourses, base, arrow, count) +
+              "</section>";
+            count += groupCourses.length;
+          }
+          return html;
+        }
+
         function validateConfig(cfg) {
           if (!cfg || typeof cfg !== "object") {
             return { ok: false, message: "Configuration is missing. Add site-config.js (copy from site-config.example.js)." };
@@ -1113,6 +1546,7 @@
           var errEl = document.getElementById("config-error");
           var titleEl = document.getElementById("site-title");
           var subEl = document.getElementById("site-subtitle");
+          var controlsEl = document.getElementById("catalog-controls");
 
           var check = validateConfig(cfg);
           if (!check.ok) {
@@ -1120,6 +1554,9 @@
             grid.innerHTML = "";
             errEl.textContent = check.message;
             errEl.hidden = false;
+            if (controlsEl) {
+              controlsEl.hidden = true;
+            }
             subEl.textContent = "Update configuration to show course links.";
             setSubtitleA11y("");
             applyFooter(cfg);
@@ -1128,59 +1565,34 @@
           }
 
           errEl.hidden = true;
+          if (controlsEl) {
+            controlsEl.hidden = false;
+          }
           titleEl.textContent = cfg.siteTitle || "Canvas course enrollment";
           document.title = cfg.siteTitle || "Canvas course enrollment";
+          var arrow =
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>';
 
           var eyebrowEl = document.getElementById("site-eyebrow");
           if (eyebrowEl) {
-            eyebrowEl.textContent =
-              typeof cfg.siteEyebrow === "string" && cfg.siteEyebrow.trim() ? cfg.siteEyebrow.trim() : "Self-enrollment";
+            var learnMoreText =
+              typeof cfg.learnMoreText === "string" && cfg.learnMoreText.trim()
+                ? cfg.learnMoreText.trim()
+                : "Learn more about Mini-Courses";
+            var learnMoreUrl =
+              typeof cfg.learnMoreUrl === "string" && cfg.learnMoreUrl.trim()
+                ? safeExternalUrl(cfg.learnMoreUrl)
+                : "https://sites.google.com/asdrp.org/student-training/mini-courses";
+            eyebrowEl.setAttribute("href", learnMoreUrl);
+            eyebrowEl.innerHTML = escapeHtml(learnMoreText) + " " + arrow;
           }
 
           setupSubtitle(cfg);
           applyFooter(cfg);
+          setupCatalogControls();
 
           var base = normalizeEnrollBase(cfg.enrollBaseUrl);
-          var arrow =
-            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>';
-          var bookIcon =
-            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
-
-          var html = "";
-          for (var i = 0; i < cfg.courses.length; i++) {
-            var course = cfg.courses[i];
-            var href = buildEnrollUrl(base, course.code);
-            var label = "Join " + course.title + " in Canvas";
-            var bylineHtml = courseBylineMarkup(course);
-            html +=
-              '<article class="course-card" style="--i:' +
-              i +
-              '">' +
-              '<div class="course-card-inner">' +
-              '<div class="course-card-head">' +
-              '<div class="course-icon" aria-hidden="true">' +
-              bookIcon +
-              "</div>" +
-              '<div class="course-card-title-block">' +
-              '<h2 class="course-title">' +
-              escapeHtml(course.title) +
-              "</h2>" +
-              bylineHtml +
-              "</div>" +
-              "</div>" +
-              "</div>" +
-              '<div class="course-card-foot">' +
-              '<a class="btn-join" href="' +
-              escapeAttr(href) +
-              '" target="_blank" rel="noopener noreferrer" aria-label="' +
-              escapeAttr(label) +
-              '">Join in Canvas ' +
-              arrow +
-              "</a>" +
-              "</div>" +
-              "</article>";
-          }
-          grid.innerHTML = html;
+          grid.innerHTML = coursesMarkup(cfg.courses, base, arrow);
         }
 
         if (document.readyState === "loading") {
