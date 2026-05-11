@@ -43,7 +43,7 @@
         session: "Session 1",
         format: "In-Person",
         code: "MPGGDC",
-        advisors: [{ name: "M. Jupelli", url: "https://www.asdrp.org/biology" }],
+        advisors: [{ name: "M. Jupelli", url: "https://www.asdrp.org/jupelli" }],
       },
       {
         title: "Strategies in Drug Design",
