@@ -397,10 +397,20 @@
       .course-card-title-block {
         flex: 1;
         min-width: 0;
-        display: grid;
-        grid-template-rows: minmax(calc(0.15rem + 2 * 1.35 * 1.07rem), auto) auto;
-        row-gap: 0.35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
         align-content: start;
+      }
+
+      .course-meta {
+        margin: 0;
+        font-size: 0.75rem;
+        line-height: 1.35;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: #94a3b8;
+        text-transform: none;
       }
 
       .course-by {
@@ -692,6 +702,7 @@
 
       .course-title {
         margin: 0;
+        min-height: calc(0.15rem + 2 * 1.35 * 1.07rem);
         padding-top: 0.15rem;
         font-size: 1.07rem;
         font-weight: 600;
@@ -972,7 +983,7 @@
       <section class="catalog-controls" id="catalog-controls" aria-label="Course display controls">
         <div class="catalog-control" role="group" aria-label="Group courses">
           <span class="catalog-control-label" aria-hidden="true">Group By</span>
-          <button class="catalog-control-button" type="button" data-group="session" aria-pressed="true">Session</button>
+          <button class="catalog-control-button" type="button" data-group="block" aria-pressed="true">Block</button>
           <button class="catalog-control-button" type="button" data-group="format" aria-pressed="false">In-Person/Online</button>
         </div>
       </section>
@@ -988,7 +999,7 @@
         var subtitleAnimTimer = null;
         var subtitleAnimToken = 0;
         var catalogState = {
-          group: "session",
+          group: "block",
         };
 
         function clearSubtitleAnimation() {
@@ -1127,6 +1138,19 @@
             );
           }
           return '<span class="course-by-name">' + escapeHtml(advisor.name) + "</span>";
+        }
+
+        function courseSecondaryMetaMarkup(course) {
+          var label = "";
+          if (catalogState.group === "block") {
+            label = courseFormatLabel(course);
+          } else if (catalogState.group === "format") {
+            label = courseBlockLabel(course);
+          }
+          if (!label || label === "Other") {
+            return "";
+          }
+          return '<p class="course-meta">' + escapeHtml(label) + "</p>";
         }
 
         function courseBylineMarkup(course) {
@@ -1389,8 +1413,11 @@
           return raw || "Other";
         }
 
-        function courseSessionLabel(course) {
-          var raw = course && course.session != null ? String(course.session).trim() : "";
+        function courseBlockLabel(course) {
+          var raw = course && course.block != null ? String(course.block).trim() : "";
+          if (!raw && course && course.session != null) {
+            raw = String(course.session).trim();
+          }
           return raw || "Other";
         }
 
@@ -1435,6 +1462,7 @@
         function courseCardMarkup(course, index, base, arrow) {
           var href = buildEnrollUrl(base, course.code);
           var label = "Join " + course.title + " in Canvas";
+          var metaHtml = courseSecondaryMetaMarkup(course);
           var bylineHtml = courseBylineMarkup(course);
           var imageHtml = courseImageMarkup(course);
           return (
@@ -1450,6 +1478,7 @@
             '<h2 class="course-title">' +
             escapeHtml(course.title) +
             "</h2>" +
+            metaHtml +
             bylineHtml +
             "</div>" +
             "</div>" +
@@ -1476,7 +1505,7 @@
         }
 
         function coursesMarkup(courses, base, arrow) {
-          var getGroupLabel = catalogState.group === "format" ? courseFormatLabel : courseSessionLabel;
+          var getGroupLabel = catalogState.group === "format" ? courseFormatLabel : courseBlockLabel;
           var groups = [];
           var groupMap = {};
           for (var i = 0; i < courses.length; i++) {
@@ -1489,10 +1518,10 @@
           }
 
           groups.sort(function (a, b) {
-            if (a === "Session 1") return -1;
-            if (b === "Session 1") return 1;
-            if (a === "Session 2") return -1;
-            if (b === "Session 2") return 1;
+            if (a === "Block 1") return -1;
+            if (b === "Block 1") return 1;
+            if (a === "Block 2") return -1;
+            if (b === "Block 2") return 1;
             if (a === "In-Person") return -1;
             if (b === "In-Person") return 1;
             if (a === "Online") return -1;
