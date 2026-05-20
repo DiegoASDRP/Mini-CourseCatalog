@@ -1408,6 +1408,27 @@
           return base + enc;
         }
 
+        function courseEnrollHref(course, base) {
+          if (!course) {
+            return "";
+          }
+          var direct = course.enrollUrl != null ? safeExternalUrl(String(course.enrollUrl)) : "";
+          if (direct) {
+            return direct;
+          }
+          return buildEnrollUrl(base, course.code);
+        }
+
+        function courseHasEnrollLink(course) {
+          if (!course) {
+            return false;
+          }
+          if (course.enrollUrl != null && safeExternalUrl(String(course.enrollUrl))) {
+            return true;
+          }
+          return !!(course.code && String(course.code).trim());
+        }
+
         function courseFormatLabel(course) {
           var raw = course && course.format != null ? String(course.format).trim() : "";
           return raw || "Other";
@@ -1460,8 +1481,13 @@
         }
 
         function courseCardMarkup(course, index, base, arrow) {
-          var href = buildEnrollUrl(base, course.code);
-          var label = "Join " + course.title + " in Canvas";
+          var href = courseEnrollHref(course, base);
+          var usesExternalUrl =
+            course.enrollUrl != null && !!safeExternalUrl(String(course.enrollUrl));
+          var joinBtnText = usesExternalUrl ? "Register " : "Join in Canvas ";
+          var label = usesExternalUrl
+            ? "Register for " + course.title
+            : "Join " + course.title + " in Canvas";
           var metaHtml = courseSecondaryMetaMarkup(course);
           var bylineHtml = courseBylineMarkup(course);
           var imageHtml = courseImageMarkup(course);
@@ -1488,7 +1514,8 @@
             escapeAttr(href) +
             '" target="_blank" rel="noopener noreferrer" aria-label="' +
             escapeAttr(label) +
-            '">Join in Canvas ' +
+            '">' +
+            joinBtnText +
             arrow +
             "</a>" +
             "</div>" +
@@ -1558,12 +1585,18 @@
             };
           }
           if (!Array.isArray(cfg.courses) || cfg.courses.length === 0) {
-            return { ok: false, message: "Add at least one course with a title and join code in site-config.js." };
+            return {
+              ok: false,
+              message: "Add at least one course with a title and join code or enrollUrl in site-config.js.",
+            };
           }
           for (var i = 0; i < cfg.courses.length; i++) {
             var c = cfg.courses[i];
-            if (!c || !c.title || !c.code) {
-              return { ok: false, message: "Each course needs a title and code (check entry " + (i + 1) + ")." };
+            if (!c || !c.title || !courseHasEnrollLink(c)) {
+              return {
+                ok: false,
+                message: "Each course needs a title and code or enrollUrl (check entry " + (i + 1) + ").",
+              };
             }
           }
           return { ok: true };
