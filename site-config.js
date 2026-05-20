@@ -50,7 +50,7 @@
         courseNumber: "MC9",
         block: "Block 1",
         format: "In-Person",
-        code: "XWA6T9",
+        code: "W98JAN",
         advisors: [{ name: "E. Njoo", url: "https://www.njoolab.org/" }],
       },
       {
