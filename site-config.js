@@ -130,7 +130,7 @@
         courseNumber: "MC4",
         block: "Block 2",
         format: "Online",
-        code: "W98JAN",
+        code: "XWA6T9",
         advisors: [{ name: "Phil Mui", url: "https://sites.google.com/asdrp.org/mui" }],
       },
       {
