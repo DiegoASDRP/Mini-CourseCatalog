@@ -109,7 +109,7 @@
         courseNumber: "MC16",
         block: "Block 2",
         format: "In-Person",
-        code: "B7XGNA",
+        code: "6CJ334",
         advisors: [
           {
             name: "Feng Wang-Johanning",
@@ -122,7 +122,7 @@
         courseNumber: "MC17",
         block: "Block 2",
         format: "In-Person",
-        code: "EHELW8",
+        code: "XH9ATM",
         advisors: [{ name: "Jay Tapash Sarkar", url: "https://sites.google.com/asdrp.org/sarkar" }],
       },
       {
