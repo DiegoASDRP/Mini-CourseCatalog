@@ -126,6 +126,13 @@
         advisors: [{ name: "Jay Tapash Sarkar", url: "https://sites.google.com/asdrp.org/sarkar" }],
       },
       {
+        title: "Research Presentation Skills",
+        block: "Block 2",
+        format: "In-Person",
+        enrollUrl: "https://www.asdrp.org/r?to=pyr",
+        advisors: [{ name: "E. Njoo", url: "https://www.njoolab.org/" }],
+      },
+      {
         title: "AI Research Foundations: Data Engineering & Representation",
         courseNumber: "MC4",
         block: "Block 2",
