@@ -59,7 +59,7 @@
         block: "Block 1",
         format: "In-Person",
         code: "7FWTHE",
-        advisors: [{ name: "Darach Miller", url: "https://sites.google.com/asdrp.org/miller" }],
+        advisors: [{ name: "D. Miller", url: "https://sites.google.com/asdrp.org/miller" }],
       },
       {
         title: "Introduction to Data Collection from Databases",
@@ -92,6 +92,14 @@
         format: "Online",
         code: "AC9AYE",
         advisors: [{ name: "L. McMahan", url: "https://sites.google.com/asdrp.org/mcmahan" }],
+      },
+      {
+        title: "Foundations of Human Participant Research Design",
+        courseNumber: "MC19",
+        block: "Block 1",
+        format: "Online",
+        code: "T96MAF",
+        advisors: [{ name: "S. Jahanikia", url: "https://sites.google.com/asdrp.org/jahanikia" }],
       },
       {
         title: "Organic Reaction Planning",
