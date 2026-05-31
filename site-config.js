@@ -96,7 +96,7 @@
       {
         title: "Foundations of Human Participant Research Design",
         courseNumber: "MC19",
-        block: "Block 1",
+        block: "Block 2",
         format: "Online",
         code: "T96MAF",
         advisors: [{ name: "S. Jahanikia", url: "https://sites.google.com/asdrp.org/jahanikia" }],
