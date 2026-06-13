@@ -781,6 +781,17 @@
         opacity: 0.9;
       }
 
+      .course-capacity-full {
+        margin: 0;
+        padding: 0.74rem 1.1rem;
+        text-align: center;
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        color: #f87171;
+      }
+
       .alert {
         max-width: 40rem;
         margin: 2rem auto 0;
@@ -1429,6 +1440,10 @@
           return !!(course.code && String(course.code).trim());
         }
 
+        function courseIsFull(course) {
+          return !!(course && course.full);
+        }
+
         function courseFormatLabel(course) {
           var raw = course && course.format != null ? String(course.format).trim() : "";
           return raw || "Other";
@@ -1481,6 +1496,7 @@
         }
 
         function courseCardMarkup(course, index, base, arrow) {
+          var isFull = courseIsFull(course);
           var href = courseEnrollHref(course, base);
           var usesExternalUrl =
             course.enrollUrl != null && !!safeExternalUrl(String(course.enrollUrl));
@@ -1491,6 +1507,16 @@
           var metaHtml = courseSecondaryMetaMarkup(course);
           var bylineHtml = courseBylineMarkup(course);
           var imageHtml = courseImageMarkup(course);
+          var footHtml = isFull
+            ? '<p class="course-capacity-full" role="status">Reached Capacity</p>'
+            : '<a class="btn-join" href="' +
+              escapeAttr(href) +
+              '" target="_blank" rel="noopener noreferrer" aria-label="' +
+              escapeAttr(label) +
+              '">' +
+              joinBtnText +
+              arrow +
+              "</a>";
           return (
             '<article class="course-card" style="--i:' +
             index +
@@ -1510,14 +1536,7 @@
             "</div>" +
             "</div>" +
             '<div class="course-card-foot">' +
-            '<a class="btn-join" href="' +
-            escapeAttr(href) +
-            '" target="_blank" rel="noopener noreferrer" aria-label="' +
-            escapeAttr(label) +
-            '">' +
-            joinBtnText +
-            arrow +
-            "</a>" +
+            footHtml +
             "</div>" +
             "</article>"
           );
@@ -1551,6 +1570,8 @@
             if (b === "Block 2") return 1;
             if (a === "In-Person") return -1;
             if (b === "In-Person") return 1;
+            if (a === "Zoom") return -1;
+            if (b === "Zoom") return 1;
             if (a === "Online") return -1;
             if (b === "Online") return 1;
             return a.localeCompare(b, undefined, { sensitivity: "base" });
