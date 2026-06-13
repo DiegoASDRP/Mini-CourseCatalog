@@ -60,7 +60,7 @@
         block: "Block 1",
         format: "In-Person",
         code: "7FWTHE",
-        advisors: [{ name: "Darach Miller", url: "https://sites.google.com/asdrp.org/miller" }],
+        advisors: [{ name: "D. Miller", url: "https://sites.google.com/asdrp.org/miller" }],
       },
       {
         title: "Introduction to Data Collection from Databases",
@@ -100,7 +100,7 @@
         block: "Block 1",
         format: "Online",
         code: "T96MAF",
-        advisors: [{ name: "Sahar Jahanikia", url: "https://sites.google.com/asdrp.org/jahanikia" }],
+        advisors: [{ name: "S. Jahanikia", url: "https://sites.google.com/asdrp.org/jahanikia" }],
       },
       {
         title: "Organic Reaction Planning",
