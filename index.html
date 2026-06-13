@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="description" content="Self-enrollment links for ASDRP Canvas courses." />
     <title>Canvas course enrollment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1002,7 +1005,8 @@
       <div id="config-error" class="alert" hidden></div>
       <footer class="site-footer" id="site-footer"></footer>
     </div>
-    <script src="site-config.js"></script>
+    <!-- Deploy: bump CACHE_VERSION when publishing (also update the Canvas iframe ?v= in README). -->
+    <script src="site-config.js?v=1.6"></script>
     <script>
       (function () {
         "use strict";
