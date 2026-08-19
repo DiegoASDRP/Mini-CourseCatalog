@@ -526,26 +526,73 @@
       }
 
       .grid {
-        display: grid;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 1rem;
-        grid-template-columns: 1fr;
+      }
+
+      .grid > .course-card {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
       }
 
       @media (min-width: 540px) {
-        .grid {
-          grid-template-columns: repeat(2, 1fr);
+        .grid > .course-card {
+          flex-basis: calc((100% - 1rem) / 2);
+          max-width: calc((100% - 1rem) / 2);
         }
       }
 
       @media (min-width: 900px) {
         .grid {
-          grid-template-columns: repeat(3, 1fr);
           gap: 1.35rem;
+        }
+
+        .grid > .course-card {
+          flex-basis: calc((100% - 2.7rem) / 3);
+          max-width: calc((100% - 2.7rem) / 3);
         }
       }
 
       .course-group + .course-group {
         margin-top: 1.65rem;
+      }
+
+      @media (min-width: 720px) {
+        .catalog--compact {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: 1.35rem;
+          row-gap: 1.85rem;
+          align-items: start;
+        }
+
+        .catalog--compact .course-group + .course-group {
+          margin-top: 0;
+        }
+
+        .catalog--compact .grid > .course-card {
+          flex-basis: 100%;
+          max-width: 100%;
+        }
+
+        .catalog--compact .course-group:has(.course-card:nth-child(n + 2)) {
+          grid-column: 1 / -1;
+        }
+
+        .catalog--compact .course-group:has(.course-card:nth-child(n + 2)) .grid > .course-card {
+          flex-basis: calc((100% - 1.35rem) / 2);
+          max-width: calc((100% - 1.35rem) / 2);
+        }
+
+        .catalog--compact .course-group:last-child:nth-child(odd):not(:has(.course-card:nth-child(n + 2))) {
+          grid-column: 1 / -1;
+          width: 100%;
+          max-width: calc((100% - 1.35rem) / 2);
+          justify-self: center;
+        }
       }
 
       .course-group-title {
@@ -1006,7 +1053,7 @@
       <footer class="site-footer" id="site-footer"></footer>
     </div>
     <!-- Deploy: bump CACHE_VERSION when publishing (also update the Canvas iframe ?v= in README). -->
-    <script src="site-config.js?v=1.7"></script>
+    <script src="site-config.js?v=1.8"></script>
     <script>
       (function () {
         "use strict";
@@ -1016,6 +1063,7 @@
         var catalogState = {
           group: "block",
         };
+        var COMPACT_CATALOG_LIMIT = 8;
 
         function clearSubtitleAnimation() {
           if (subtitleAnimTimer) {
@@ -1679,6 +1727,7 @@
           setupCatalogControls();
 
           var base = normalizeEnrollBase(cfg.enrollBaseUrl);
+          grid.className = cfg.courses.length <= COMPACT_CATALOG_LIMIT ? "catalog catalog--compact" : "catalog";
           grid.innerHTML = coursesMarkup(cfg.courses, base, arrow);
         }
 
