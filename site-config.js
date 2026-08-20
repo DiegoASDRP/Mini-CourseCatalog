@@ -46,7 +46,9 @@
         title: "Research Presentation Skills",
         block: "Sundays 1:30 PM - 3:00 PM",
         format: "In-Person",
-        enrollUrl: "https://www.asdrp.org/r?to=pyr",
+        // enrollUrl: "https://www.asdrp.org/r?to=pyr", // TODO: uncomment this when the course is open for enrollment and remove the statusMessage
+        statusMessage:
+          "Research Presentation Skill sign-ups will be available after the transition period. Keep an eye in your email inbox for the announcement",
         advisors: [{ name: "E. Njoo", url: "https://www.njoolab.org/" }],
       },
     ],
