@@ -842,6 +842,18 @@
         color: #f87171;
       }
 
+      .course-status-message {
+        margin: 0;
+        padding: 0.74rem 1.1rem;
+        text-align: center;
+        font-family: inherit;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        line-height: 1.45;
+        letter-spacing: 0.01em;
+        color: #fde68a;
+      }
+
       .alert {
         max-width: 40rem;
         margin: 2rem auto 0;
@@ -1053,7 +1065,7 @@
       <footer class="site-footer" id="site-footer"></footer>
     </div>
     <!-- Deploy: bump CACHE_VERSION when publishing (also update the Canvas iframe ?v= in README). -->
-    <script src="site-config.js?v=1.8"></script>
+    <script src="site-config.js?v=1.9"></script>
     <script>
       (function () {
         "use strict";
@@ -1496,6 +1508,13 @@
           return !!(course && course.full);
         }
 
+        function courseStatusMessage(course) {
+          if (!course || course.statusMessage == null) {
+            return "";
+          }
+          return String(course.statusMessage).trim();
+        }
+
         function courseFormatLabel(course) {
           var raw = course && course.format != null ? String(course.format).trim() : "";
           return raw || "Other";
@@ -1549,6 +1568,7 @@
 
         function courseCardMarkup(course, index, base, arrow) {
           var isFull = courseIsFull(course);
+          var statusMsg = courseStatusMessage(course);
           var href = courseEnrollHref(course, base);
           var usesExternalUrl =
             course.enrollUrl != null && !!safeExternalUrl(String(course.enrollUrl));
@@ -1559,9 +1579,17 @@
           var metaHtml = courseSecondaryMetaMarkup(course);
           var bylineHtml = courseBylineMarkup(course);
           var imageHtml = courseImageMarkup(course);
-          var footHtml = isFull
-            ? '<p class="course-capacity-full" role="status">Reached Capacity</p>'
-            : '<a class="btn-join" href="' +
+          var footHtml;
+          if (statusMsg) {
+            footHtml =
+              '<p class="course-status-message" role="status">' +
+              escapeHtml(statusMsg) +
+              "</p>";
+          } else if (isFull) {
+            footHtml = '<p class="course-capacity-full" role="status">Reached Capacity</p>';
+          } else {
+            footHtml =
+              '<a class="btn-join" href="' +
               escapeAttr(href) +
               '" target="_blank" rel="noopener noreferrer" aria-label="' +
               escapeAttr(label) +
@@ -1569,6 +1597,7 @@
               joinBtnText +
               arrow +
               "</a>";
+          }
           return (
             '<article class="course-card" style="--i:' +
             index +
@@ -1665,10 +1694,19 @@
           }
           for (var i = 0; i < cfg.courses.length; i++) {
             var c = cfg.courses[i];
-            if (!c || !c.title || !courseHasEnrollLink(c)) {
+            if (!c || !c.title) {
               return {
                 ok: false,
-                message: "Each course needs a title and code or enrollUrl (check entry " + (i + 1) + ").",
+                message: "Each course needs a title (check entry " + (i + 1) + ").",
+              };
+            }
+            if (!courseHasEnrollLink(c) && !courseStatusMessage(c) && !courseIsFull(c)) {
+              return {
+                ok: false,
+                message:
+                  "Each course needs a code, enrollUrl, statusMessage, or full:true (check entry " +
+                  (i + 1) +
+                  ").",
               };
             }
           }
