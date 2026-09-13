@@ -21,7 +21,7 @@
       {
         title: "Statistics for the Life Sciences",
         courseNumber: "MC1",
-        block: "Mondays 7:30 PM - 9:00 PM PST",
+        block: "Wednesday 7:30 PM - 9:00 PM PST",
         format: "Zoom",
         code: "CGMHNN",
         advisors: [{ name: "C. Cunha", url: "https://sites.google.com/asdrp.org/cunha" }],
